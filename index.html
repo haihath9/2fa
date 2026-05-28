@@ -1,273 +1,421 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-  <!-- SEO -->
-  <title>2FA Code Generator - Free Online TOTP Authenticator</title>
-  <meta name="description" content="Free online 2FA code generator for TOTP authentication. Generate secure OTP verification codes instantly using your Base32 secret key. Compatible with Google Authenticator and other 2FA apps.">
-  <meta name="keywords" content="2FA generator, TOTP generator, OTP code generator, Google Authenticator, two factor authentication, Base32 secret, online authenticator">
-  <meta name="author" content="2FA Tool">
-  <meta name="robots" content="index, follow">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- SEO -->
+<title>2FA Code Generator - Free Online TOTP Authenticator</title>
+<meta name="description" content="Free online 2FA code generator for TOTP authentication. Generate secure OTP verification codes instantly using your Base32 secret key.">
+<meta name="keywords" content="2FA generator, TOTP generator, OTP code, Google Authenticator, two factor authentication">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="2FA Code Generator">
-  <meta property="og:description" content="Generate secure TOTP 2FA authentication codes online instantly.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://yourdomain.com/">
-  <meta property="og:image" content="https://yourdomain.com/preview.jpg">
+<!-- Open Graph -->
+<meta property="og:title" content="2FA Code Generator">
+<meta property="og:description" content="Generate secure TOTP authentication codes instantly online.">
+<meta property="og:type" content="website">
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="2FA Code Generator">
-  <meta name="twitter:description" content="Free online TOTP authenticator tool.">
-  <meta name="twitter:image" content="https://yourdomain.com/preview.jpg">
+<meta name="theme-color" content="#0d6efd">
 
-  <meta name="theme-color" content="#007bff">
+<style>
 
-  <style>
-    *{
-      box-sizing:border-box;
-    }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    body { 
-      font-family: Arial, sans-serif; 
-      padding: 20px; 
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: #f5f7fb;
-      margin:0;
-      color:#333;
-      line-height:1.6;
-    }
+body{
+  font-family:Arial,sans-serif;
+  background:#f4f7fb;
+  color:#333;
+  line-height:1.6;
+}
 
-    .container {
-      max-width: 460px;
-      width: 100%;
-      background: #fff;
-      padding: 25px;
-      border-radius: 16px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-      margin-bottom:30px;
-    }
+/* HEADER */
 
-    h1 {
-      text-align: center;
-      color: #222;
-      margin-bottom: 10px;
-      font-size: 30px;
-    }
+header{
+  width:100%;
+  background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,0.06);
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
 
-    .desc{
-      text-align:center;
-      color:#666;
-      font-size:15px;
-      margin-bottom:20px;
-      line-height:1.6;
-    }
+.header-wrap{
+  max-width:1200px;
+  margin:auto;
+  padding:14px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
 
-    .input-box {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 15px;
-      width: 100%;
-      padding-top: 8px;
-    }
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:24px;
+  font-weight:bold;
+  color:#0d6efd;
+}
 
-    input {
-      padding: 14px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      font-size: 16px;
-      width: 100%;
-      margin-bottom: 10px;
-      outline:none;
-      transition:0.2s;
-    }
+.logo-icon{
+  width:42px;
+  height:42px;
+  border-radius:10px;
+  background:#0d6efd;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-size:22px;
+  font-weight:bold;
+}
 
-    input:focus{
-      border-color:#007bff;
-      box-shadow:0 0 0 3px rgba(0,123,255,0.15);
-    }
+nav{
+  display:flex;
+  gap:25px;
+}
 
-    .btn-group {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
+nav a{
+  text-decoration:none;
+  color:#333;
+  font-weight:600;
+  transition:0.2s;
+}
 
-    button {
-      flex: 1;
-      padding: 13px;
-      font-size: 16px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: 0.2s;
-      font-weight:bold;
-    }
+nav a:hover{
+  color:#0d6efd;
+}
 
-    button:hover { 
-      opacity: 0.92; 
-      transform:translateY(-1px);
-    }
+/* MOBILE MENU */
 
-    #start { 
-      background: #28a745; 
-      color: white; 
-    }
+.menu-btn{
+  display:none;
+  font-size:30px;
+  cursor:pointer;
+}
 
-    #clear { 
-      background: #dc3545; 
-      color: white; 
-    }
+.mobile-menu{
+  display:none;
+  flex-direction:column;
+  background:#fff;
+  border-top:1px solid #eee;
+}
 
-    #copy { 
-      background: #007bff; 
-      color: white; 
-      width: 100%; 
-      margin-top: 10px; 
-    }
+.mobile-menu a{
+  padding:15px 20px;
+  text-decoration:none;
+  color:#333;
+  border-bottom:1px solid #f0f0f0;
+  font-weight:600;
+}
 
-    #code-box {
-      text-align: center;
-      padding: 24px;
-      border: 2px dashed #007bff;
-      border-radius: 14px;
-      font-size: 2.3em;
-      font-weight: bold;
-      margin-bottom: 15px;
-      color: #007bff;
-      background: #f0f7ff;
-      letter-spacing:3px;
-    }
+.mobile-menu a:hover{
+  background:#f7f7f7;
+}
 
-    #timer {
-      text-align: center;
-      font-size: 1.05em;
-      color: #555;
-      margin-top: 10px;
-    }
+/* MAIN */
 
-    #error { 
-      color: red; 
-      margin-top: 10px; 
-      text-align: center; 
-      font-size:14px;
-    }
+.main-wrap{
+  max-width:1100px;
+  margin:auto;
+  padding:40px 20px;
+}
 
-    .content-section{
-      max-width:900px;
-      width:100%;
-    }
+.container{
+  width:100%;
+  background:#fff;
+  padding:35px;
+  border-radius:20px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.06);
+  margin-bottom:30px;
+}
 
-    .seo-box{
-      background:#fff;
-      border-radius:16px;
-      padding:30px;
-      margin-bottom:25px;
-      box-shadow:0 4px 14px rgba(0,0,0,0.06);
-    }
+h1{
+  text-align:center;
+  font-size:38px;
+  margin-bottom:12px;
+  color:#222;
+}
 
-    .seo-box h2{
-      margin-top:0;
-      color:#222;
-      font-size:28px;
-      margin-bottom:18px;
-    }
+.desc{
+  text-align:center;
+  color:#666;
+  margin-bottom:25px;
+  font-size:16px;
+}
 
-    .seo-box h3{
-      color:#007bff;
-      margin-top:28px;
-      margin-bottom:10px;
-      font-size:20px;
-    }
+.input-box{
+  margin-bottom:15px;
+}
 
-    .seo-box p{
-      color:#555;
-      margin-bottom:15px;
-    }
+input{
+  width:100%;
+  padding:16px;
+  border-radius:12px;
+  border:1px solid #ccc;
+  font-size:16px;
+  outline:none;
+  transition:0.2s;
+}
 
-    .steps{
-      padding-left:20px;
-    }
+input:focus{
+  border-color:#0d6efd;
+  box-shadow:0 0 0 4px rgba(13,110,253,0.12);
+}
 
-    .steps li{
-      margin-bottom:12px;
-      color:#444;
-    }
+.btn-group{
+  display:flex;
+  gap:15px;
+  margin-bottom:20px;
+}
 
-    .faq-item{
-      border-bottom:1px solid #eee;
-      padding:18px 0;
-    }
+button{
+  flex:1;
+  padding:15px;
+  border:none;
+  border-radius:12px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.2s;
+}
 
-    .faq-item:last-child{
-      border-bottom:none;
-    }
+button:hover{
+  transform:translateY(-1px);
+  opacity:0.94;
+}
 
-    .faq-item h3{
-      margin:0 0 10px;
-      color:#222;
-      font-size:19px;
-    }
+#start{
+  background:#28a745;
+  color:#fff;
+}
 
-    .faq-item p{
-      margin:0;
-      color:#555;
-    }
+#clear{
+  background:#dc3545;
+  color:#fff;
+}
 
-    .highlight{
-      background:#eef6ff;
-      border-left:4px solid #007bff;
-      padding:16px;
-      border-radius:8px;
-      margin-top:20px;
-      color:#444;
-    }
+#copy{
+  width:100%;
+  background:#0d6efd;
+  color:#fff;
+  margin-top:10px;
+}
 
-    footer{
-      text-align:center;
-      color:#777;
-      margin-top:10px;
-      font-size:14px;
-    }
+#code-box{
+  text-align:center;
+  padding:30px;
+  border:3px dashed #0d6efd;
+  border-radius:18px;
+  background:#f1f7ff;
+  font-size:58px;
+  font-weight:bold;
+  color:#0d6efd;
+  letter-spacing:6px;
+}
 
-    @media (max-width: 600px){
-      body{
-        padding:15px;
-      }
+#timer{
+  margin-top:14px;
+  text-align:center;
+  color:#555;
+  font-size:17px;
+}
 
-      .container,
-      .seo-box{
-        padding:20px;
-      }
+#error{
+  margin-top:12px;
+  color:red;
+  text-align:center;
+}
 
-      h1{
-        font-size:25px;
-      }
+/* SEO CONTENT */
 
-      .seo-box h2{
-        font-size:24px;
-      }
+.seo-box{
+  background:#fff;
+  border-radius:20px;
+  padding:35px;
+  margin-bottom:25px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.05);
+}
 
-      #code-box{
-        font-size:1.9em;
-        padding:18px;
-      }
+.seo-box h2{
+  font-size:30px;
+  margin-bottom:18px;
+  color:#222;
+}
 
-      input,
-      button{
-        font-size:15px;
-      }
-    }
-  </style>
+.seo-box h3{
+  margin-top:25px;
+  margin-bottom:10px;
+  color:#0d6efd;
+}
+
+.seo-box p{
+  color:#555;
+  margin-bottom:15px;
+}
+
+.steps{
+  padding-left:20px;
+}
+
+.steps li{
+  margin-bottom:12px;
+}
+
+.highlight{
+  background:#eef5ff;
+  border-left:5px solid #0d6efd;
+  padding:18px;
+  border-radius:10px;
+  margin-top:20px;
+}
+
+.faq-item{
+  padding:20px 0;
+  border-bottom:1px solid #eee;
+}
+
+.faq-item:last-child{
+  border-bottom:none;
+}
+
+footer{
+  text-align:center;
+  padding:30px 20px;
+  color:#777;
+  font-size:14px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  nav{
+    display:none;
+  }
+
+  .menu-btn{
+    display:block;
+  }
+
+  .mobile-menu.show{
+    display:flex;
+  }
+
+  .container{
+    padding:22px;
+  }
+
+  .seo-box{
+    padding:22px;
+  }
+
+  h1{
+    font-size:30px;
+  }
+
+  .seo-box h2{
+    font-size:24px;
+  }
+
+  #code-box{
+    font-size:42px;
+    padding:22px;
+    letter-spacing:4px;
+  }
+
+  .btn-group{
+    flex-direction:column;
+  }
+
+  button{
+    width:100%;
+  }
+
+}
+
+@media(max-width:480px){
+
+  .header-wrap{
+    padding:12px 15px;
+  }
+
+  .logo{
+    font-size:20px;
+  }
+
+  .logo-icon{
+    width:36px;
+    height:36px;
+    font-size:18px;
+  }
+
+  .main-wrap{
+    padding:20px 12px;
+  }
+
+  h1{
+    font-size:26px;
+  }
+
+  .desc{
+    font-size:14px;
+  }
+
+  #code-box{
+    font-size:34px;
+    letter-spacing:2px;
+  }
+
+  input{
+    padding:14px;
+    font-size:15px;
+  }
+
+}
+
+</style>
 </head>
 
 <body>
+
+<header>
+
+  <div class="header-wrap">
+
+    <div class="logo">
+      <div class="logo-icon">2F</div>
+      2FA Tools
+    </div>
+
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Get Thumb YTB</a>
+      <a href="#">QR Generator</a>
+      <a href="#">OTP Tools</a>
+      <a href="#">Contact</a>
+    </nav>
+
+    <div class="menu-btn" onclick="toggleMenu()">
+      ☰
+    </div>
+
+  </div>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#">Home</a>
+    <a href="#">Get Thumb YTB</a>
+    <a href="#">QR Generator</a>
+    <a href="#">OTP Tools</a>
+    <a href="#">Contact</a>
+  </div>
+
+</header>
+
+<div class="main-wrap">
 
   <div class="container">
 
@@ -298,107 +446,80 @@
   </div>
 
   <!-- SEO CONTENT -->
-  <div class="content-section">
 
-    <div class="seo-box">
+  <div class="seo-box">
 
-      <h2>How to Use the 2FA Code Generator</h2>
+    <h2>How to Use the 2FA Code Generator</h2>
 
-      <p>
-        This free online 2FA code generator allows you to create secure TOTP authentication codes instantly from your Base32 secret key.
-        The tool works completely in your browser and supports most popular authenticator systems.
-      </p>
+    <p>
+      This free online 2FA code generator allows you to create secure TOTP authentication codes instantly from your Base32 secret key.
+    </p>
 
-      <ol class="steps">
-        <li>Copy your Base32 secret key from your authenticator setup.</li>
-        <li>Paste the secret key into the input field above.</li>
-        <li>Click the "Generate Code" button.</li>
-        <li>Your 6-digit OTP code will appear instantly.</li>
-        <li>The code refreshes automatically every 30 seconds.</li>
-        <li>Use the "Copy Code" button to quickly copy the OTP.</li>
-      </ol>
+    <ol class="steps">
+      <li>Copy your Base32 secret key from your authenticator setup.</li>
+      <li>Paste the secret key into the field above.</li>
+      <li>Click "Generate Code".</li>
+      <li>Your 6-digit OTP code will appear instantly.</li>
+      <li>The code refreshes automatically every 30 seconds.</li>
+    </ol>
 
-      <div class="highlight">
-        Important: Your secret key never leaves your browser.
-        All TOTP calculations are processed locally for maximum privacy and security.
-      </div>
-
-    </div>
-
-    <div class="seo-box">
-
-      <h2>What is TOTP and 2FA?</h2>
-
-      <p>
-        Two-factor authentication (2FA) is an additional layer of security used to protect online accounts.
-        TOTP (Time-based One-Time Password) generates temporary verification codes that expire after a short period of time.
-      </p>
-
-      <p>
-        Services like Google, Facebook, Binance, GitHub, Discord, and many others use TOTP authentication apps to help secure user accounts against unauthorized access.
-      </p>
-
-    </div>
-
-    <div class="seo-box">
-
-      <h2>Frequently Asked Questions (FAQ)</h2>
-
-      <div class="faq-item">
-        <h3>Is this 2FA code generator safe?</h3>
-        <p>
-          Yes. All calculations happen directly in your browser using JavaScript.
-          Your Base32 secret is never uploaded to any server.
-        </p>
-      </div>
-
-      <div class="faq-item">
-        <h3>Does this tool work with Google Authenticator?</h3>
-        <p>
-          Yes. This TOTP generator is compatible with Google Authenticator,
-          Microsoft Authenticator, Authy, Binance Authenticator, and most RFC 6238 compatible apps.
-        </p>
-      </div>
-
-      <div class="faq-item">
-        <h3>Why does my OTP code refresh every 30 seconds?</h3>
-        <p>
-          TOTP authentication uses time-based security.
-          Codes automatically expire every 30 seconds to improve account protection.
-        </p>
-      </div>
-
-      <div class="faq-item">
-        <h3>What is a Base32 secret key?</h3>
-        <p>
-          A Base32 secret is the unique key provided when enabling 2FA on an account.
-          It is used to generate secure one-time verification codes.
-        </p>
-      </div>
-
-      <div class="faq-item">
-        <h3>Can I use this tool on mobile devices?</h3>
-        <p>
-          Yes. The page is fully responsive and works on smartphones, tablets, and desktop browsers.
-        </p>
-      </div>
-
-      <div class="faq-item">
-        <h3>Does this website store my secret key?</h3>
-        <p>
-          No. Your secret key stays only inside your browser session and is never stored or transmitted.
-        </p>
-      </div>
-
+    <div class="highlight">
+      Your secret key never leaves your browser.
+      All calculations are performed locally for maximum privacy.
     </div>
 
   </div>
 
-  <footer>
-    © 2026 2FA Code Generator - Secure TOTP Authentication Tool
-  </footer>
+  <div class="seo-box">
+
+    <h2>Frequently Asked Questions (FAQ)</h2>
+
+    <div class="faq-item">
+      <h3>Is this tool safe?</h3>
+      <p>
+        Yes. Your Base32 secret is never uploaded to any server.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Does this work with Google Authenticator?</h3>
+      <p>
+        Yes. It supports Google Authenticator, Authy, Microsoft Authenticator and other compatible apps.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Why does the code change every 30 seconds?</h3>
+      <p>
+        TOTP security codes automatically refresh every 30 seconds for enhanced security.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Can I use this on mobile?</h3>
+      <p>
+        Yes. The website is fully responsive and optimized for smartphones and tablets.
+      </p>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 2FA Tools - Secure TOTP Authentication Generator
+</footer>
 
 <script>
+
+function toggleMenu(){
+
+  document
+    .getElementById("mobileMenu")
+    .classList
+    .toggle("show");
+}
+
 (async function(){
 
   const $ = (s)=>document.querySelector(s);
@@ -411,42 +532,51 @@
   const copyBtn = $('#copy');
   const errorEl = $('#error');
 
-  let secret = '';
   let lastCode = '';
   let interval;
 
   startBtn.addEventListener('click', ()=> start());
 
   clearBtn.addEventListener('click', ()=> {
+
     secretEl.value = '';
+
     codeEl.textContent = '------';
+
     timerEl.textContent = 'Time left: --s';
+
     showError('');
+
     if(interval) clearInterval(interval);
+
   });
 
-  secretEl.addEventListener('keyup',(e)=>{
-    if(e.key==='Enter') start();
-  });
+  copyBtn.addEventListener('click', ()=> {
 
-  copyBtn.addEventListener('click', ()=> { 
     if(lastCode){
+
       navigator.clipboard.writeText(lastCode);
+
       copyBtn.textContent = 'Copied!';
+
       setTimeout(()=>{
         copyBtn.textContent = 'Copy Code';
       },1200);
+
     }
+
   });
 
   async function start(){
 
-    secret = (secretEl.value||'')
+    const secret = (secretEl.value||'')
       .trim()
       .replace(/\s+/g,'');
 
     if(!secret){
+
       showError('Please enter a valid Base32 secret.');
+
       return;
     }
 
@@ -454,12 +584,15 @@
 
     if(interval) clearInterval(interval);
 
-    updateCode();
+    updateCode(secret);
 
-    interval = setInterval(updateCode, 1000);
+    interval = setInterval(()=>{
+      updateCode(secret);
+    },1000);
+
   }
 
-  async function updateCode(){
+  async function updateCode(secret){
 
     try {
 
@@ -516,7 +649,9 @@
       ((hmac[offset + 2] & 0xff) << 8) |
       (hmac[offset + 3] & 0xff);
 
-    return (bin % 1e6).toString().padStart(6, '0');
+    return (bin % 1e6)
+      .toString()
+      .padStart(6, '0');
   }
 
   function base32Decode(input){
@@ -538,6 +673,7 @@
       if(idx===-1) throw new Error('bad char');
 
       bits += idx.toString(2).padStart(5,'0');
+
     }
 
     for(let i=0;i+8<=bits.length;i+=8){
