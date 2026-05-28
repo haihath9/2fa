@@ -1,1 +1,566 @@
 
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- SEO -->
+  <title>2FA Code Generator - Free Online TOTP Authenticator</title>
+  <meta name="description" content="Free online 2FA code generator for TOTP authentication. Generate secure OTP verification codes instantly using your Base32 secret key. Compatible with Google Authenticator and other 2FA apps.">
+  <meta name="keywords" content="2FA generator, TOTP generator, OTP code generator, Google Authenticator, two factor authentication, Base32 secret, online authenticator">
+  <meta name="author" content="2FA Tool">
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="2FA Code Generator">
+  <meta property="og:description" content="Generate secure TOTP 2FA authentication codes online instantly.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourdomain.com/">
+  <meta property="og:image" content="https://yourdomain.com/preview.jpg">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="2FA Code Generator">
+  <meta name="twitter:description" content="Free online TOTP authenticator tool.">
+  <meta name="twitter:image" content="https://yourdomain.com/preview.jpg">
+
+  <meta name="theme-color" content="#007bff">
+
+  <style>
+    *{
+      box-sizing:border-box;
+    }
+
+    body { 
+      font-family: Arial, sans-serif; 
+      padding: 20px; 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #f5f7fb;
+      margin:0;
+      color:#333;
+      line-height:1.6;
+    }
+
+    .container {
+      max-width: 460px;
+      width: 100%;
+      background: #fff;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      margin-bottom:30px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #222;
+      margin-bottom: 10px;
+      font-size: 30px;
+    }
+
+    .desc{
+      text-align:center;
+      color:#666;
+      font-size:15px;
+      margin-bottom:20px;
+      line-height:1.6;
+    }
+
+    .input-box {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 15px;
+      width: 100%;
+      padding-top: 8px;
+    }
+
+    input {
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+      width: 100%;
+      margin-bottom: 10px;
+      outline:none;
+      transition:0.2s;
+    }
+
+    input:focus{
+      border-color:#007bff;
+      box-shadow:0 0 0 3px rgba(0,123,255,0.15);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    button {
+      flex: 1;
+      padding: 13px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+      font-weight:bold;
+    }
+
+    button:hover { 
+      opacity: 0.92; 
+      transform:translateY(-1px);
+    }
+
+    #start { 
+      background: #28a745; 
+      color: white; 
+    }
+
+    #clear { 
+      background: #dc3545; 
+      color: white; 
+    }
+
+    #copy { 
+      background: #007bff; 
+      color: white; 
+      width: 100%; 
+      margin-top: 10px; 
+    }
+
+    #code-box {
+      text-align: center;
+      padding: 24px;
+      border: 2px dashed #007bff;
+      border-radius: 14px;
+      font-size: 2.3em;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #007bff;
+      background: #f0f7ff;
+      letter-spacing:3px;
+    }
+
+    #timer {
+      text-align: center;
+      font-size: 1.05em;
+      color: #555;
+      margin-top: 10px;
+    }
+
+    #error { 
+      color: red; 
+      margin-top: 10px; 
+      text-align: center; 
+      font-size:14px;
+    }
+
+    .content-section{
+      max-width:900px;
+      width:100%;
+    }
+
+    .seo-box{
+      background:#fff;
+      border-radius:16px;
+      padding:30px;
+      margin-bottom:25px;
+      box-shadow:0 4px 14px rgba(0,0,0,0.06);
+    }
+
+    .seo-box h2{
+      margin-top:0;
+      color:#222;
+      font-size:28px;
+      margin-bottom:18px;
+    }
+
+    .seo-box h3{
+      color:#007bff;
+      margin-top:28px;
+      margin-bottom:10px;
+      font-size:20px;
+    }
+
+    .seo-box p{
+      color:#555;
+      margin-bottom:15px;
+    }
+
+    .steps{
+      padding-left:20px;
+    }
+
+    .steps li{
+      margin-bottom:12px;
+      color:#444;
+    }
+
+    .faq-item{
+      border-bottom:1px solid #eee;
+      padding:18px 0;
+    }
+
+    .faq-item:last-child{
+      border-bottom:none;
+    }
+
+    .faq-item h3{
+      margin:0 0 10px;
+      color:#222;
+      font-size:19px;
+    }
+
+    .faq-item p{
+      margin:0;
+      color:#555;
+    }
+
+    .highlight{
+      background:#eef6ff;
+      border-left:4px solid #007bff;
+      padding:16px;
+      border-radius:8px;
+      margin-top:20px;
+      color:#444;
+    }
+
+    footer{
+      text-align:center;
+      color:#777;
+      margin-top:10px;
+      font-size:14px;
+    }
+
+    @media (max-width: 600px){
+      body{
+        padding:15px;
+      }
+
+      .container,
+      .seo-box{
+        padding:20px;
+      }
+
+      h1{
+        font-size:25px;
+      }
+
+      .seo-box h2{
+        font-size:24px;
+      }
+
+      #code-box{
+        font-size:1.9em;
+        padding:18px;
+      }
+
+      input,
+      button{
+        font-size:15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>2FA Code Generator</h1>
+
+    <p class="desc">
+      Generate secure TOTP authentication codes instantly using your Base32 secret key.
+      Compatible with Google Authenticator, Authy, Microsoft Authenticator, and other 2FA apps.
+    </p>
+
+    <div class="input-box">
+      <input type="text" id="secret" placeholder="Enter Base32 Secret">
+    </div>
+
+    <div class="btn-group">
+      <button id="start">Generate Code</button>
+      <button id="clear">Clear</button>
+    </div>
+
+    <div id="code-box">------</div>
+
+    <button id="copy">Copy Code</button>
+
+    <div id="timer">Time left: --s</div>
+
+    <div id="error" style="display:none"></div>
+
+  </div>
+
+  <!-- SEO CONTENT -->
+  <div class="content-section">
+
+    <div class="seo-box">
+
+      <h2>How to Use the 2FA Code Generator</h2>
+
+      <p>
+        This free online 2FA code generator allows you to create secure TOTP authentication codes instantly from your Base32 secret key.
+        The tool works completely in your browser and supports most popular authenticator systems.
+      </p>
+
+      <ol class="steps">
+        <li>Copy your Base32 secret key from your authenticator setup.</li>
+        <li>Paste the secret key into the input field above.</li>
+        <li>Click the "Generate Code" button.</li>
+        <li>Your 6-digit OTP code will appear instantly.</li>
+        <li>The code refreshes automatically every 30 seconds.</li>
+        <li>Use the "Copy Code" button to quickly copy the OTP.</li>
+      </ol>
+
+      <div class="highlight">
+        Important: Your secret key never leaves your browser.
+        All TOTP calculations are processed locally for maximum privacy and security.
+      </div>
+
+    </div>
+
+    <div class="seo-box">
+
+      <h2>What is TOTP and 2FA?</h2>
+
+      <p>
+        Two-factor authentication (2FA) is an additional layer of security used to protect online accounts.
+        TOTP (Time-based One-Time Password) generates temporary verification codes that expire after a short period of time.
+      </p>
+
+      <p>
+        Services like Google, Facebook, Binance, GitHub, Discord, and many others use TOTP authentication apps to help secure user accounts against unauthorized access.
+      </p>
+
+    </div>
+
+    <div class="seo-box">
+
+      <h2>Frequently Asked Questions (FAQ)</h2>
+
+      <div class="faq-item">
+        <h3>Is this 2FA code generator safe?</h3>
+        <p>
+          Yes. All calculations happen directly in your browser using JavaScript.
+          Your Base32 secret is never uploaded to any server.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Does this tool work with Google Authenticator?</h3>
+        <p>
+          Yes. This TOTP generator is compatible with Google Authenticator,
+          Microsoft Authenticator, Authy, Binance Authenticator, and most RFC 6238 compatible apps.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Why does my OTP code refresh every 30 seconds?</h3>
+        <p>
+          TOTP authentication uses time-based security.
+          Codes automatically expire every 30 seconds to improve account protection.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>What is a Base32 secret key?</h3>
+        <p>
+          A Base32 secret is the unique key provided when enabling 2FA on an account.
+          It is used to generate secure one-time verification codes.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Can I use this tool on mobile devices?</h3>
+        <p>
+          Yes. The page is fully responsive and works on smartphones, tablets, and desktop browsers.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Does this website store my secret key?</h3>
+        <p>
+          No. Your secret key stays only inside your browser session and is never stored or transmitted.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer>
+    © 2026 2FA Code Generator - Secure TOTP Authentication Tool
+  </footer>
+
+<script>
+(async function(){
+
+  const $ = (s)=>document.querySelector(s);
+
+  const secretEl = $('#secret');
+  const startBtn = $('#start');
+  const clearBtn = $('#clear');
+  const codeEl = $('#code-box');
+  const timerEl = $('#timer');
+  const copyBtn = $('#copy');
+  const errorEl = $('#error');
+
+  let secret = '';
+  let lastCode = '';
+  let interval;
+
+  startBtn.addEventListener('click', ()=> start());
+
+  clearBtn.addEventListener('click', ()=> {
+    secretEl.value = '';
+    codeEl.textContent = '------';
+    timerEl.textContent = 'Time left: --s';
+    showError('');
+    if(interval) clearInterval(interval);
+  });
+
+  secretEl.addEventListener('keyup',(e)=>{
+    if(e.key==='Enter') start();
+  });
+
+  copyBtn.addEventListener('click', ()=> { 
+    if(lastCode){
+      navigator.clipboard.writeText(lastCode);
+      copyBtn.textContent = 'Copied!';
+      setTimeout(()=>{
+        copyBtn.textContent = 'Copy Code';
+      },1200);
+    }
+  });
+
+  async function start(){
+
+    secret = (secretEl.value||'')
+      .trim()
+      .replace(/\s+/g,'');
+
+    if(!secret){
+      showError('Please enter a valid Base32 secret.');
+      return;
+    }
+
+    showError('');
+
+    if(interval) clearInterval(interval);
+
+    updateCode();
+
+    interval = setInterval(updateCode, 1000);
+  }
+
+  async function updateCode(){
+
+    try {
+
+      const period = 30;
+
+      const now = Math.floor(Date.now()/1000);
+
+      const remain = period - (now % period);
+
+      lastCode = await totp(secret, period);
+
+      codeEl.textContent = lastCode;
+
+      timerEl.textContent = "Time left: " + remain + "s";
+
+    } catch(e){
+
+      showError('Invalid Base32 secret.');
+
+    }
+  }
+
+  async function totp(base32Secret, period=30){
+
+    const keyBytes = base32Decode(base32Secret.toUpperCase());
+
+    const counter = Math.floor(Date.now()/1000/period);
+
+    const msg = new ArrayBuffer(8);
+
+    const view = new DataView(msg);
+
+    view.setUint32(0, Math.floor(counter / 0x100000000));
+
+    view.setUint32(4, counter >>> 0);
+
+    const cryptoKey = await crypto.subtle.importKey(
+      'raw',
+      keyBytes,
+      { name: 'HMAC', hash: 'SHA-1' },
+      false,
+      ['sign']
+    );
+
+    const hmac = new Uint8Array(
+      await crypto.subtle.sign('HMAC', cryptoKey, msg)
+    );
+
+    const offset = hmac[hmac.length - 1] & 0x0f;
+
+    const bin =
+      ((hmac[offset] & 0x7f) << 24) |
+      ((hmac[offset + 1] & 0xff) << 16) |
+      ((hmac[offset + 2] & 0xff) << 8) |
+      (hmac[offset + 3] & 0xff);
+
+    return (bin % 1e6).toString().padStart(6, '0');
+  }
+
+  function base32Decode(input){
+
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+
+    const clean = input
+      .replace(/=+$/,'')
+      .replace(/\s+/g,'');
+
+    let bits = '';
+
+    let bytes = [];
+
+    for(const c of clean){
+
+      const idx = alphabet.indexOf(c);
+
+      if(idx===-1) throw new Error('bad char');
+
+      bits += idx.toString(2).padStart(5,'0');
+    }
+
+    for(let i=0;i+8<=bits.length;i+=8){
+
+      bytes.push(parseInt(bits.slice(i,i+8),2));
+
+    }
+
+    return new Uint8Array(bytes);
+  }
+
+  function showError(msg){
+
+    errorEl.style.display = msg ? 'block' : 'none';
+
+    errorEl.textContent = msg;
+  }
+
+})();
+</script>
+
+</body>
+</html>
+```
