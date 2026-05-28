@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 
 <!-- SEO -->
-<title>2FA Code Generator - 2FA Auth, 2FA Live, 2FA Authentication, Get code 2FA</title>
-<meta name="description" content="Web get 2FA Secret Get code for 2 factor authentication, Get 2fa auth online, 2FA Auth, Get 2Fa Live, Get 2Fa Facebook, Get 2FA Code, 2fa authenticator online, 2fa auth google, Free online 2FA code generator for TOTP authentication. Generate secure OTP verification codes instantly using your Base32 secret key.">
+<title>2FA Code Generator - Free Online TOTP Authenticator</title>
+<meta name="description" content="Free online 2FA code generator for TOTP authentication. Generate secure OTP verification codes instantly using your Base32 secret key.">
 <meta name="keywords" content="2FA generator, TOTP generator, OTP code, Google Authenticator, two factor authentication">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -147,48 +147,40 @@ h1{
   font-size:16px;
 }
 
-/* BOX INPUT */
-
 .input-box{
-  margin-bottom:10px;
-  max-width:420px;
-  margin-left:auto;
-  margin-right:auto;
+  margin-bottom:15px;
 }
 
 input{
   width:100%;
-  padding:10px 12px;
-  border-radius:10px;
+  padding:16px;
+  border-radius:12px;
   border:1px solid #ccc;
-  font-size:14px;
+  font-size:16px;
   outline:none;
   transition:0.2s;
 }
 
 input:focus{
   border-color:#0d6efd;
-  box-shadow:0 0 0 3px rgba(13,110,253,0.10);
+  box-shadow:0 0 0 4px rgba(13,110,253,0.12);
 }
-
 
 .btn-group{
   display:flex;
-  gap:10px;
-  margin-bottom:18px;
-  justify-content:center;
+  gap:15px;
+  margin-bottom:20px;
 }
 
 button{
-  padding:11px 18px;
+  flex:1;
+  padding:15px;
   border:none;
-  border-radius:10px;
-  font-size:14px;
-  font-weight:600;
+  border-radius:12px;
+  font-size:16px;
+  font-weight:bold;
   cursor:pointer;
   transition:0.2s;
-  flex:none;
-  min-width:120px;
 }
 
 button:hover{
@@ -207,15 +199,36 @@ button:hover{
 }
 
 #copy{
-  display:block;
-  width:auto;
-  min-width:140px;
-  margin:14px auto 0;
+  width:100%;
   background:#0d6efd;
   color:#fff;
+  margin-top:10px;
 }
 
+#code-box{
+  text-align:center;
+  padding:30px;
+  border:3px dashed #0d6efd;
+  border-radius:18px;
+  background:#f1f7ff;
+  font-size:58px;
+  font-weight:bold;
+  color:#0d6efd;
+  letter-spacing:6px;
+}
 
+#timer{
+  margin-top:14px;
+  text-align:center;
+  color:#555;
+  font-size:17px;
+}
+
+#error{
+  margin-top:12px;
+  color:red;
+  text-align:center;
+}
 
 /* SEO CONTENT */
 
@@ -684,3 +697,4 @@ function toggleMenu(){
 
 </body>
 </html>
+```
