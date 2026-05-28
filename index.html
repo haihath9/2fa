@@ -147,42 +147,52 @@ h1{
   font-size:16px;
 }
 
+Thay CSS cũ của phần input và khung code bằng đoạn này để toàn bộ khu vực nhập 2FA và kết quả nhỏ khoảng 1/2 hiện tại nhưng vẫn đẹp và dễ nhìn:
+
+```css id="x7m2vf"
+/* BOX INPUT */
+
 .input-box{
-  margin-bottom:15px;
+  margin-bottom:10px;
+  max-width:420px;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 input{
   width:100%;
-  padding:16px;
-  border-radius:12px;
+  padding:10px 12px;
+  border-radius:10px;
   border:1px solid #ccc;
-  font-size:16px;
+  font-size:14px;
   outline:none;
   transition:0.2s;
 }
 
 input:focus{
   border-color:#0d6efd;
-  box-shadow:0 0 0 4px rgba(13,110,253,0.12);
+  box-shadow:0 0 0 3px rgba(13,110,253,0.10);
 }
+
+/* BUTTON */
 
 .btn-group{
   display:flex;
-  gap:10px;
-  margin-bottom:18px;
+  gap:8px;
+  margin-bottom:14px;
   justify-content:center;
 }
 
 button{
-  padding:11px 18px;
+  padding:8px 14px;
   border:none;
-  border-radius:10px;
-  font-size:14px;
+  border-radius:8px;
+  font-size:13px;
   font-weight:600;
   cursor:pointer;
   transition:0.2s;
   flex:none;
-  min-width:120px;
+  min-width:95px;
 }
 
 button:hover{
@@ -190,60 +200,52 @@ button:hover{
   opacity:0.94;
 }
 
-#start{
-  background:#28a745;
-  color:#fff;
-}
+/* RESULT CODE BOX */
 
-#clear{
-  background:#dc3545;
-  color:#fff;
+#code-box{
+  max-width:420px;
+  margin:0 auto;
+  text-align:center;
+  padding:16px;
+  border:2px dashed #0d6efd;
+  border-radius:14px;
+  background:#f1f7ff;
+  font-size:30px;
+  font-weight:bold;
+  color:#0d6efd;
+  letter-spacing:3px;
 }
 
 #copy{
   display:block;
   width:auto;
-  min-width:140px;
-  margin:14px auto 0;
+  min-width:120px;
+  margin:10px auto 0;
   background:#0d6efd;
   color:#fff;
 }
-```
-
-Nếu muốn button còn nhỏ hơn nữa thì dùng:
-
-```css
-button{
-  padding:9px 16px;
-  font-size:13px;
-  min-width:100px;
-}
-
-
-#code-box{
-  text-align:center;
-  padding:30px;
-  border:3px dashed #0d6efd;
-  border-radius:18px;
-  background:#f1f7ff;
-  font-size:58px;
-  font-weight:bold;
-  color:#0d6efd;
-  letter-spacing:6px;
-}
 
 #timer{
-  margin-top:14px;
+  margin-top:10px;
   text-align:center;
   color:#555;
-  font-size:17px;
+  font-size:14px;
 }
 
 #error{
-  margin-top:12px;
+  margin-top:8px;
   color:red;
   text-align:center;
+  font-size:13px;
 }
+
+
+/* MOBILE */ 
+  
+  @media(max-width:768px){
+    #code-box{ font-size:24px; padding:14px; 
+     letter-spacing:2px; } 
+   input{ font-size:13px; padding:9px 11px; }
 
 /* SEO CONTENT */
 
